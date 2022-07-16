@@ -12,6 +12,5 @@ def start(message):
 def start_game(message):
     CreateTable(message.from_user.id, message.from_user.username, message.chat.id)
     bot.send_message(message.chat.id, "Игра успешно началась")
-    bot.send_message(message.chat.id, "Hello!")
 
 bot.polling(none_stop=True)
