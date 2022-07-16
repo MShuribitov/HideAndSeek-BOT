@@ -1,0 +1,21 @@
+import sqlite3
+
+class CreateTable:
+    def __init__(self, userid, username, chatid):
+        self.userid = str(userid)
+        self.username = username
+        db = sqlite3.connect('database/groups.db')
+        cursor = db.cursor()
+        cursor.execute(f"""CREATE TABLE IF NOT EXISTS group_{chatid} (
+            u_id TEXT,
+            u_name TEXT,
+            u_role TEXT,
+            u_position TEXT
+        )""")
+        cursor.execute(f"SELECT u_id FROM group_{chatid} WHERE u_id = {self.userid}")
+        check = cursor.fetchall()
+        if not check:
+            cursor.execute(f"INSERT INTO group_{chatid} VALUES (?, ?, ?, ?)", (self.userid, self.username, "Мирный", "None"))
+            db.commit()
+        else:
+            pass
